@@ -1,0 +1,13 @@
+<body>
+    <script>
+
+        const location_top = [-17.395043, -67.162132];
+        const location_bottom = [-55.953762, -69.938468];
+
+        const count = [...new Array(20)].map((_, index)=>fetch(`https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=2021-12-${index}&endtime=2021-12-${index+1}&minlatitude=${location_bottom[0]}&minlongitude=${location_bottom[1]}&maxlatitude=${location_top[0]}&maxlongitude=${location_top[1]}`)
+            .then(r => r.json())
+            .then(r => [index, r]))
+
+        Promise.all(count).then(r=>console.log(r));
+    </script>
+</body>
